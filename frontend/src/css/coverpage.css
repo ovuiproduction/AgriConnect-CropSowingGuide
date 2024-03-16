@@ -1,0 +1,87 @@
+.coverBody{
+  width:100%;
+  height:100vh;
+  background-image:url(../Assets/images/coverimg.jpg);
+  background-repeat: no-repeat;
+  background-size:100% 100%;
+}
+
+.coverBodylayer{
+  width:100%;
+  height:100%;
+  background-color:rgba(35, 48, 33, 0.5);
+}
+
+.coverHeader{
+  width:auto;
+  height:auto;
+  color: white;
+  padding:1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:green;
+}
+
+.coverNav{
+  width:80%;
+  height: auto;
+  display: flex;
+  color: white;
+}
+
+.coverHeaderText{
+  font-size:30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight:600;
+}
+
+.coverServices{
+  margin-left:50%;
+  column-gap:2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coverHomeLink{
+  color: black;
+  font-size:20px;
+  color: white;
+  text-decoration: none;
+}
+
+.coverServicesLink{
+  color: black;
+  font-size:20px;
+  color: white;
+  text-decoration: none;
+}
+
+.coverStart{
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  /* background-color:green; */
+  border:4px solid green;
+  margin:15% auto auto auto;
+  width:max-content;
+  border-radius:5px;
+  padding:1rem;
+  cursor: pointer;
+  transform:1s 1s;
+}
+
+.coverStartLink{
+  font-size:25px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  color:white;
+  text-decoration: none;
+}
+
+.coverStart:hover{
+  background-color:darkgreen;
+  border-color:white;
+  border-radius:0px;
+}

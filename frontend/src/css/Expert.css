@@ -1,0 +1,32 @@
+.addPesticideForm{
+    width:50%;
+    height:auto;
+    background-color:rgb(245, 246, 247);
+    margin: auto;
+    margin-top: 1%;
+    padding: 2rem;
+    border-radius: 8px;
+}
+.headingExpert{
+    margin-top: 0px;
+    font-size: 40px;
+    cursor: pointer;
+}
+.expertNavbar{
+    height: 10vh;
+}
+.expertHeader{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+}
+.expertHeader h1{
+    color: rgb(124, 122, 122);
+}
+.submitLink{
+    text-decoration: none;
+    color: white;
+    
+}
