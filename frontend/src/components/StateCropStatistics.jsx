@@ -1,9 +1,69 @@
 import react from "react";
+import { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
+import Chart from "chart.js/auto";
 import "../css/SowingGuide.css";
+
 
 export default function StateCropStatistics(props) {
   const { state, crops } = props;
+  let currstate = state;
+  if(currstate==="Madhyapradesh"){
+    currstate="Madhya Pradesh";
+  }else if(currstate==="Uttarpradesh"){
+    currstate="Uttar Pradesh";
+  }
+  const croplist = Object.keys(crops);
+  let [cropdata, setCropdata] = useState([]);
+  const fetchCropData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/statecropreview", {
+        method: "post",
+        body: JSON.stringify({ state: currstate, crops: crops }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setCropdata(data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  const createChart = () => {
+    const ctx = document.getElementById("myChart");
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: croplist,
+        datasets: [
+          {
+            label: "Crop area",
+            data: cropdata,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    fetchCropData();
+  }, []);
+
+  useEffect(() => {
+    if (cropdata.length > 0) {
+      createChart();
+    }
+  }, [cropdata]);
+
   return (
     <>
       <link
@@ -58,6 +118,23 @@ export default function StateCropStatistics(props) {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="overviewofstate">
+        <div className="prevyeargraph">
+          <h2
+            style={{
+              fontFamily: "sans-serif",
+              fontWeight: 600,
+              color: "blueviolet",
+            }}
+          >
+            {currstate}
+          </h2>
+          <div style={{ width: 800, height: 400 }}>
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
       </div>
     </>
   );
