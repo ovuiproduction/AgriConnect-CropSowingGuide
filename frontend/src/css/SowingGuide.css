@@ -48,8 +48,9 @@ body{
      font-size:25px;
  }
  .commodity{
-     margin:50px auto auto 50px;
-     width:100%;
+     margin: auto;
+     margin-top: 50px;
+     width:max-content;
      height:max-content;
      display: flex;
      column-gap:50px;
@@ -64,4 +65,24 @@ body{
     height:200px;
     border: 1px solid rgb(243, 242, 242);
  }
- 
+ .overviewofstate{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top:70px;
+    margin-bottom: 100px;
+    height:500px;
+ }
+.prevyeargraph{
+    width:40%;
+    height: 100%;
+}
+.canvas{
+    max-width:500px;
+    max-height:400px;
+}
+.statemap{
+    width:40%;
+    height:100%;
+}

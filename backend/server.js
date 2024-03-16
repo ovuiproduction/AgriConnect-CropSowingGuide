@@ -116,7 +116,25 @@ app.post("/statecropreview", async (req, res) => {
 });
 
 
-
+app.post("/cropdivisionreview", async (req, res) => {
+    const state = req.body.state;
+    const crops = req.body.crops;
+    const division = req.body.division;
+   try {
+       const counts = await Promise.all([
+           // here division array implementation
+           cropcoll.countDocuments({ state: state, cropname: crops[0] ,division:division}),
+           cropcoll.countDocuments({ state: state, cropname: crops[1] ,division:division}),
+           cropcoll.countDocuments({ state: state, cropname: crops[2] ,division:division}),
+           cropcoll.countDocuments({ state: state, cropname: crops[3] ,division:division}),
+           cropcoll.countDocuments({ state: state, cropname: crops[4] ,division:division})
+       ]);
+       res.send({ status: "ok", data: counts });
+   } catch (error) {
+       console.error("Error occurred:", error);
+       res.status(500).send({ status: "error", message: "Internal server error" });
+   }
+});
 
 
 app.listen(port,()=>{

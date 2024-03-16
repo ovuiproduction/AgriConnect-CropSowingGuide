@@ -1,4 +1,5 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import {
   Link,
   Route,
@@ -18,6 +19,7 @@ import SowingGuide from "./components/SowingGuide";
 import StateCropStatistics from "./components/StateCropStatistics";
 import CropDistribution from "./components/CropDistribution";
 import PunjabDivision from "./components/Punjab";
+import RegionCropdistribution from "./components/RegionCropDistribution";
 
 const mahacrops = {
   Jowar: require("./Assets/images/jowarlogo.webp"),
@@ -112,28 +114,44 @@ export default function App() {
             exact
             path="/maharashtra"
             element={
-              <StateCropStatistics state={"Maharashtra"} crops={mahacrops} />
+              <StateCropStatistics
+                state={"Maharashtra"}
+                crops={mahacrops}
+                divisions={mahaDivisions}
+              />
             }
           />
           <Route
             exact
             path="/madhyapradesh"
             element={
-              <StateCropStatistics state={"Madhyapradesh"} crops={mpcrops} />
+              <StateCropStatistics
+                state={"Madhyapradesh"}
+                crops={mpcrops}
+                divisions={mpDivisions}
+              />
             }
           />
           <Route
             exact
             path="/uttarpradesh"
             element={
-              <StateCropStatistics state={"Uttarpradesh"} crops={upcrops} />
+              <StateCropStatistics
+                state={"Uttarpradesh"}
+                crops={upcrops}
+                divisions={upDivisions}
+              />
             }
           />
           <Route
             exact
             path="/punjab"
             element={
-              <StateCropStatistics state={"Punjab"} crops={punjabcrops} />
+              <StateCropStatistics
+                state={"Punjab"}
+                crops={punjabcrops}
+                divisions={punjabDivisions}
+              />
             }
           />
           <Route
@@ -143,6 +161,7 @@ export default function App() {
               <StateCropStatistics
                 state={"West Bengal"}
                 crops={westbengalcrops}
+                divisions={westBengalDivisions}
               />
             }
           />
@@ -429,6 +448,47 @@ export default function App() {
                 crop={"Tea"}
                 division={westBengalDivisions}
               />
+            }
+          />
+
+          {/* routes for region in maharashtra */}
+          <Route
+            exact
+            path="/:division/Maharashtra"
+            element={
+              <RegionCropdistribution state="Maharashtra" crops={mahacrops} />
+            }
+          />
+          {/* routes for region in madhyaprdesh */}
+          <Route
+            exact
+            path="/:division/Madhyapradesh"
+            element={
+              <RegionCropdistribution state="Madhya Pradesh" crops={mpcrops} />
+            }
+          />
+          {/* routes for region in Uttarpradesh */}
+          <Route
+            exact
+            path="/:division/Uttarpradesh"
+            element={
+              <RegionCropdistribution state="Uttar Pradesh" crops={upcrops} />
+            }
+          />
+          {/* routes for region in Punjab */}
+          <Route
+            exact
+            path="/:division/punjab"
+            element={
+              <RegionCropdistribution state="Punjab" crops={punjabcrops} />
+            }
+          />
+          {/* routes for region in west bengal */}
+          <Route
+            exact
+            path="/:division/West Bengal"
+            element={
+              <RegionCropdistribution state="West Bengal" crops={westbengalcrops} />
             }
           />
 

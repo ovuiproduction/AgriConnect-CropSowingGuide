@@ -1,17 +1,16 @@
 import react from "react";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 import "../css/SowingGuide.css";
 
-
 export default function StateCropStatistics(props) {
-  const { state, crops } = props;
+  const { state, crops ,divisions} = props;
   let currstate = state;
-  if(currstate==="Madhyapradesh"){
-    currstate="Madhya Pradesh";
-  }else if(currstate==="Uttarpradesh"){
-    currstate="Uttar Pradesh";
+  if (currstate === "Madhyapradesh") {
+    currstate = "Madhya Pradesh";
+  } else if (currstate === "Uttarpradesh") {
+    currstate = "Uttar Pradesh";
   }
   const croplist = Object.keys(crops);
   let [cropdata, setCropdata] = useState([]);
@@ -33,7 +32,7 @@ export default function StateCropStatistics(props) {
   const createChart = () => {
     const ctx = document.getElementById("myChart");
     new Chart(ctx, {
-      type: "bar",
+      type: "pie",
       data: {
         labels: croplist,
         datasets: [
@@ -98,6 +97,9 @@ export default function StateCropStatistics(props) {
       >
         Crops In {state}
       </label>
+
+      {/* commodity block */}
+
       <div className="commodity">
         {Object.keys(crops).map((cropname) => (
           <div
@@ -120,19 +122,56 @@ export default function StateCropStatistics(props) {
         ))}
       </div>
 
+      {/*  regions Block */}
+
+      <div className="commodity">
+        {divisions.map((division) => (
+          <div
+            style={{ border: "none" }}
+            className="card commoditycard"
+            key={division}
+          >
+            <img
+              className="card-img-top commoditylogo"
+              src={require("../Assets/images/maharashtraMap.png")}
+              alt={division}
+            />
+            <div className="card-body">
+              <h5 className="card-title">{division}</h5>
+              <Link to={`/${division}/${state}`} className="btn btn-primary">
+                Explore
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+
       <div className="overviewofstate">
-        <div className="prevyeargraph">
-          <h2
+      <div className="statemap">
+      <h3
             style={{
               fontFamily: "sans-serif",
               fontWeight: 600,
               color: "blueviolet",
+              marginBottom: "50px",
             }}
           >
-            {currstate}
-          </h2>
-          <div style={{ width: 800, height: 400 }}>
-            <canvas id="myChart"></canvas>
+          Crop Map of {currstate}
+          </h3>
+        </div>
+        <div className="prevyeargraph">
+          <h3
+            style={{
+              fontFamily: "sans-serif",
+              fontWeight: 600,
+              color: "blueviolet",
+              marginBottom: "50px",
+            }}
+          >
+            Crop Sowing Ratio in {currstate}
+          </h3>
+          <div style={{ width: 500, height: 400 }}>
+            <canvas className="canvas" id="myChart"></canvas>
           </div>
         </div>
       </div>
