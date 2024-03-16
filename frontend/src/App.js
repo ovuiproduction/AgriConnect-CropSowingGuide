@@ -18,7 +18,6 @@ import Editpost from "./components/Editpost";
 import SowingGuide from "./components/SowingGuide";
 import StateCropStatistics from "./components/StateCropStatistics";
 import CropDistribution from "./components/CropDistribution";
-import PunjabDivision from "./components/Punjab";
 import RegionCropdistribution from "./components/RegionCropDistribution";
 
 const mahacrops = {
