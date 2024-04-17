@@ -46,3 +46,15 @@ body{
     width:80%;
     margin:60px auto auto auto;
 }
+.graphBlock{
+    width:100%;
+    margin-bottom:9%;
+}
+
+.graphs{
+    width:auto;
+    height:350px;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 4rem;
+}

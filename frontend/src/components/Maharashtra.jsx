@@ -15,7 +15,7 @@ export default function MaharashtraDivision({ onDivisionChange }) {
         <select className="form-control" onChange={handleDivisionChange} name="division" id="divisionname">
           <option value="">Choose Region</option>
           <option value="West Maharashtra">West Maharashtra</option>
-          <option value="North Maharashtra">West Maharashtra</option>
+          <option value="North Maharashtra">North Maharashtra</option>
           <option value="Konkan">Konkan</option>
           <option value="Vidarbha">Vidarbha</option>
           <option value="Marathwada">Marathwada</option>

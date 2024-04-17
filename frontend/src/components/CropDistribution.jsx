@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import "../css/CropDistribution.css";
 import Chart from "chart.js/auto";
-import MaharashtraDivision from "./Maharashtra";
+import CropArea from "./CropArea";
 
 export default function CropDistribution(props) {
   let [cropdata, setCropdata] = useState([]);
   const { state, crop, division } = props;
+  let chart;
   const states = ["maharashtra","uttarpradesh","madhyapradesh","westbengal","punjab"];
   let backurl = "";
   if(state === "Maharashtra"){
@@ -41,8 +42,9 @@ export default function CropDistribution(props) {
   };
 
   const createChart = () => {
+    if(chart) chart.destroy();
     const ctx = document.getElementById("myChart");
-    new Chart(ctx, {
+    chart = new Chart(ctx, {
       type: "bar",
       data: {
         labels: division,
@@ -64,6 +66,8 @@ export default function CropDistribution(props) {
     });
   };
 
+
+
   useEffect(() => {
     fetchCropData();
   }, []);
@@ -77,13 +81,13 @@ export default function CropDistribution(props) {
   return (
     <>
     <nav className="navCropDistribution">
-        <div class="containerCropDistribution">
+        <div className="containerCropDistribution">
          <h1>{crop}</h1>
         </div>
         <Link to={`/${backurl}`}>Back</Link>
     </nav>
-      <div class="crop_sowingdata_bar">
-        <div className="prevyeargraph">
+      <div className="crop_sowingdata_bar">
+        <div className="graphBlock">
           <h2
             style={{
               fontFamily: "sans-serif",
@@ -98,6 +102,7 @@ export default function CropDistribution(props) {
           </div>
         </div>
       </div>
+      <CropArea state={state} crop={crop}/>
     </>
   );
 }

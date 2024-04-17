@@ -3,9 +3,11 @@ import { useState,useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Chart } from "chart.js/auto";
+import "../css/CropDistribution.css";
+import DivisionArea from "./DivisionArea";
 
 export default function RegionCropdistribution(props){
-    // const {state ,crops,division} = props;
+    let chart;
     const {state,crops} = props;
     const {division} = useParams();
     const states = ["maharashtra","uttarpradesh","madhyapradesh","westbengal","punjab"];
@@ -44,13 +46,13 @@ export default function RegionCropdistribution(props){
     };
     const createChart = () => {
       const ctx = document.getElementById("myChart");
-      new Chart(ctx, {
+      chart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: croplist,
           datasets: [
             {
-              label: "Crop area",
+              label: "Count Of Farmers",
               data: cropdata,
               borderWidth: 1,
             },
@@ -72,6 +74,7 @@ export default function RegionCropdistribution(props){
   
     useEffect(() => {
       if (cropdata.length > 0) {
+        if(chart) chart.destroy();
         createChart();
       }
     }, [cropdata]);
@@ -83,8 +86,8 @@ export default function RegionCropdistribution(props){
         </div>
         <Link to={`/${backurl}`}>Back</Link>
     </nav>
-        <div className="overviewofstate">
-        <div className="prevyeargraph">
+        <div className="crop_sowingdata_bar">
+        <div className="graphBlock">
           <h3
             style={{
               fontFamily: "sans-serif",
@@ -100,7 +103,7 @@ export default function RegionCropdistribution(props){
           </div>
         </div>
       </div>
-
-        </>
+      <DivisionArea division={division} state={state}/>
+      </>
     )
 }

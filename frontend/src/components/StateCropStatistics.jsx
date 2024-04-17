@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 import "../css/SowingGuide.css";
+import StateArea from "./StateArea";
 
 export default function StateCropStatistics(props) {
   const { state, crops ,divisions} = props;
   let currstate = state;
+  var piechart;
   if (currstate === "Madhyapradesh") {
     currstate = "Madhya Pradesh";
   } else if (currstate === "Uttarpradesh") {
@@ -30,8 +32,9 @@ export default function StateCropStatistics(props) {
     }
   };
   const createChart = () => {
-    const ctx = document.getElementById("myChart");
-    new Chart(ctx, {
+    if(piechart) piechart.destroy();
+    const piectx = document.getElementById("myPieChart");
+    piechart = new Chart(piectx, {
       type: "pie",
       data: {
         labels: croplist,
@@ -59,6 +62,7 @@ export default function StateCropStatistics(props) {
 
   useEffect(() => {
     if (cropdata.length > 0) {
+      if(piechart) piechart.destroy();
       createChart();
     }
   }, [cropdata]);
@@ -156,8 +160,10 @@ export default function StateCropStatistics(props) {
               marginBottom: "50px",
             }}
           >
-          Crop Map of {currstate}
+          Crop sowing Area of {currstate}
+          <StateArea  state={currstate}/>
           </h3>
+
         </div>
         <div className="prevyeargraph">
           <h3
@@ -168,10 +174,10 @@ export default function StateCropStatistics(props) {
               marginBottom: "50px",
             }}
           >
-            Crop Sowing Ratio in {currstate}
+            Crop Sowing Ratio of Farmers in {currstate}
           </h3>
           <div style={{ width: 500, height: 400 }}>
-            <canvas className="canvas" id="myChart"></canvas>
+            <canvas className="canvas" id="myPieChart"></canvas>
           </div>
         </div>
       </div>

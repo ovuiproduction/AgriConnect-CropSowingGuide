@@ -136,6 +136,27 @@ app.post("/cropdivisionreview", async (req, res) => {
    }
 });
 
+app.post('/getAreaCropNameWise',async(req,res)=>{
+    let result = cropcoll.aggregate().match({cropname:req.body.crop,state:req.body.state}).group({ _id:"$division",totalArea:{$sum:"$area"} }).then(resultSet => { 
+        console.log(resultSet); 
+        res.send({ status: "ok", data: resultSet });
+    }).catch(error => console.log(error));
+});
+
+app.post('/getAreaDivisionWise',async(req,res)=>{
+    let result = cropcoll.aggregate().match({division:req.body.division,state:req.body.state}).group({ _id:"$cropname",totalArea:{$sum:"$area"} }).then(resultSet => { 
+        console.log(resultSet); 
+        res.send({ status: "ok", data: resultSet });
+    }).catch(error => console.log(error));
+});
+
+app.post('/getAreaState',async(req,res)=>{
+    let result = cropcoll.aggregate().match({state:req.body.state}).group({ _id:"$cropname",totalArea:{$sum:"$area"} }).then(resultSet => { 
+        console.log(resultSet); 
+        res.send({ status: "ok", data: resultSet });
+    }).catch(error => console.log(error));
+});
+
 
 app.listen(port,()=>{
     console.log(`Server running on ${port}`);
