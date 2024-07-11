@@ -1,6 +1,8 @@
 /node_modules
 /packages
 .DS_Store
+package-lock.js
+package.json
 .log
 .lock
 .tmp
