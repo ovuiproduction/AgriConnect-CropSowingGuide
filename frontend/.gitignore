@@ -1,0 +1,9 @@
+/node_modules
+/packages
+.DS_Store
+.log
+.lock
+.tmp
+.o
+.pyc
+.class

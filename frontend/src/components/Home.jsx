@@ -17,8 +17,7 @@ export default function Home(){
                     <li><a className="active" href="/home">Home</a></li>
                     <li><Link to="/sowingguide">Sowing Guide</Link></li>
                     <li><Link to="/pesticideguide">Pesticide Guide</Link></li>
-                    <li><Link to="/farmertofarmer">FarmerToFarmer</Link></li>
-                    <li><a href="/services">Services</a></li>
+                    <li><Link to="/login">FarmerToFarmer</Link></li>
                     <li><Link to="/expert">Expert</Link></li>
                 </ul>
             </nav>
@@ -30,7 +29,7 @@ export default function Home(){
            <p className="q_1">For the farmer By the farmer From the farmer</p>
         </div>
         <div className="showBlock">
-            <h1 className="SubmitCropBlock"><Link to="/submitcrop" className="SubmitCropLink " >Submit Crop</Link></h1>
+            <h1 className="SubmitCropBlock"><Link to="/submitcrop" className="SubmitCropLink" >Submit Crop</Link></h1>
             <h1 className="SowingGuideBlock"><Link to="/sowingguide" className="SowingGuideLink" >Sowing Guide</Link></h1>
         </div>
         </div>

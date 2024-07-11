@@ -1,27 +1,29 @@
-import react, { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {useNavigate, useLocation } from "react-router-dom";
+import Alert, { AlertSuccess, AlertWarning } from "./Alert"; 
 import "../css/NewPost.css";
 
 export default function Editpost() {
-  let [username, setUsername] = useState("");
   let [blogtitle, setBlogtitle] = useState("");
   let [blogcontent, setBlogcontent] = useState("");
+  const [updatePostStatus,setUpdatePostStatus] = useState(false);
   const [id ,setBlogId] = useState("");
   const navigate = useNavigate();
-
   const location = useLocation();
+
+  const username = location.state.username;
+
+  useEffect(() => {
+    setBlogId(location.state.blog._id);
+    setBlogtitle(location.state.blog.blogtitle);
+    setBlogcontent(location.state.blog.blogcontent);
+  },[]);
+
 
   let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer");
+    navigate("/farmertofarmer",{state:{username:username}});
   };
-
-  useEffect(() => {
-    setBlogId(location.state._id);
-    setUsername(location.state.username);
-    setBlogtitle(location.state.blogtitle);
-    setBlogcontent(location.state.blogcontent);
-  },[]);
 
   const updatePost = async (e) => {
     e.preventDefault();
@@ -34,6 +36,12 @@ export default function Editpost() {
         },
       });
       const data = await response.json();
+      if(data.status == "ok"){
+        setUpdatePostStatus(true);
+        setTimeout(()=>{
+          navigate("/farmertofarmer",{state:{username:username}});
+        },[2000]);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -59,21 +67,9 @@ export default function Editpost() {
           </div>
         </div>
       </nav>
+      {updatePostStatus && <AlertSuccess/>}
       <div className="postBlock">
         <form>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              User Name
-            </label>
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              className="form-control"
-              id="username"
-              placeholder="Enter your name"
-            />
-          </div>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
@@ -100,7 +96,7 @@ export default function Editpost() {
             ></textarea>
           </div>
           <button onClick={updatePost} type="button" className="btn btn-primary">
-            Send Post
+            Update Post
           </button>
         </form>
       </div>

@@ -2,3 +2,14 @@
     width: 60%;
     margin: auto;
 }
+.AlertSuccessRegister{
+  position: fixed; /* Fixed position to float on the screen */
+  top: 5vh; /* Adjust as needed */
+  left: 20%; /* Adjust as needed */
+  background-color: #4CAF50; /* Green background */
+  color: white; /* White text */
+  padding: 15px;
+  z-index: 1000; /* Ensure it appears above other elements */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  border-radius: 5px; /* Rounded corners */
+}

@@ -5,6 +5,8 @@ const pesticidescoll = require("./models/pesticidescollection");
 const articlecoll = require("./models/article");
 const cors = require('cors');
 const bodyPaser = require("body-parser");
+const commentscoll = require("./models/comments");
+const usercoll = require("./models/user");
 
 const app = express();
 app.use(express.json());
@@ -19,6 +21,41 @@ mongoose.connect("mongodb://localhost:27017/cropdb")
 
 app.get("/",(req,res)=>{
     res.send("This is server");
+});
+
+
+app.post("/register",async(req,res)=>{
+    console.log("register");
+    const username = req.body.username;
+    const password = req.body.password;
+    try{
+        const user = await usercoll({username:username,password:password});
+        const result = await user.save();
+        res.status(200).send({data:result});
+    }catch(err){
+        console.log(err);
+    }
+});
+
+app.post("/login",async(req,res)=>{
+    console.log("login");
+    const username = req.body.username;
+    const password = req.body.password;
+    try{
+        const user = await usercoll.findOne({username:username});
+        if(user){
+            if(user.password == password){
+                res.status(200).send({data:"Verified"});
+            }
+            else{
+                res.status(400).send({data:"Invalid Password"});
+            }
+        }else{
+            res.status(500).send({data:"Invalid Username"});
+        }
+    }catch(err){
+        console.log(err);
+    }
 });
 
 app.post("/submitcrop",async(req,res)=>{
@@ -65,16 +102,37 @@ app.post("/deletepost",async(req,res)=>{
 });
 
 app.post("/updatepost",async(req,res)=>{
-    console.log("Body"+req.body.username);
     let article = await articlecoll.findById(req.body.id);
     article.username = req.body.username;
     article.blogtitle = req.body.blogtitle;
     article.blogcontent = req.body.blogcontent;
     article = await article.save();
     console.log("edited successfully");
-    res.send({status:"updated",data:article});
+    res.send({status:"ok",data:article});
 });
 
+app.post("/fetch-reply",async(req,res)=>{
+    const id = req.body.id;
+    console.log(id);
+    try{
+        const result = await commentscoll.find({blogId:id});
+        res.send({status:"ok",data:result});
+    }catch(err){
+        console.log(err);
+    }
+});
+app.post("/replypost",async(req,res)=>{
+    const blogId = req.body.blogId;
+    const text = req.body.text;
+    const commentOwner = req.body.commentOwner;
+    try{
+        const reply = await commentscoll({blogId:blogId,text:text,commentOwner:commentOwner});
+        const result = await reply.save();
+        res.send({status:"Ok",data:result});
+    }catch(err){
+        console.log(err);
+    }
+});
 app.post("/cropsowingratio", async (req, res) => {
      const state = req.body.state;
      const crop = req.body.crop;

@@ -16,7 +16,7 @@ export default function Expert() {
         if (status === "ok") {
             setTimeout(() => {
                 navigate("/home");
-            }, 1000); // Adjust the delay time (in milliseconds) as needed
+            }, 1000);
         }
     }, [status, navigate]);
     let returnHome = async (e) => {
@@ -58,8 +58,7 @@ export default function Expert() {
                 {status=="ok" && <AlertSuccess />}
 
             </div>
-            
-
+    
             <div className="expertHeader">
                 <h1>Add Pesticide</h1>
             </div>

@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate,useLocation } from "react-router-dom";
+import Alert, { AlertSuccess, AlertWarning } from "./Alert"; 
 import "../css/NewPost.css";
 
 export default function NewPost() {
-  const [username, setUsername] = useState("");
   const [blogtitle, setBlogtitle] = useState("");
   const [blogcontent, setBlogcontent] = useState("");
+  const [postSaveStatus,setPostSaveStatus] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const username = location.state.username;
+
   const savePost = async (e) => {
     e.preventDefault();
     try {
@@ -17,15 +23,23 @@ export default function NewPost() {
         },
       });
       const data = await response.json();
+      console.log(data);
+      if(data.status == "ok"){
+        setPostSaveStatus(true);
+        setTimeout(()=>{
+          navigate("/farmertofarmer",{state:{username:username}});
+        },[2000]);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  const navigate = useNavigate();
-  let returnfHome = async (e) => {
+  
+  let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer");
+    navigate("/farmertofarmer",{state:{username:username}});
   };
+
   return (
     <>
       <link
@@ -42,25 +56,13 @@ export default function NewPost() {
       <nav className="navbar bg-body-tertiary expertNavbar">
         <div className="container-fluid">
           <div className="headingExpert">
-            <i onClick={returnfHome} className="fa-solid fa-circle-left"></i>
+            <i onClick={returnHome} className="fa-solid fa-circle-left"></i>
           </div>
         </div>
       </nav>
+      {postSaveStatus && <AlertSuccess/>}
       <div className="postBlock">
         <form>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              User Name
-            </label>
-            <input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              type="text"
-              className="form-control"
-              id="username"
-              placeholder="Enter your name"
-            />
-          </div>
           <div className="mb-3">
             <label htmlFor="title" className="form-label">
               Title
@@ -83,7 +85,7 @@ export default function NewPost() {
               onChange={(e) => setBlogcontent(e.target.value)}
               className="form-control"
               id="exampleFormControlTextarea1"
-              rows="3"
+              rows="6"
             ></textarea>
           </div>
           <button onClick={savePost} type="button" className="btn btn-primary">

@@ -10,6 +10,26 @@ function AlertSuccess() {
         </>
     );
 }
+function AlertSuccessRegister() {
+    return (
+        <>
+            <div className="AlertSuccessRegister" >
+                Register successfully!!
+            </div>
+        </>
+    );
+}
+function AlertSuccessLogin() {
+    return (
+        <>
+
+            <div className="AlertSuccessRegister">
+                Login successfully!!
+            </div>
+        </>
+    );
+}
+
 function AlertWarning() {
     return (
         <>
@@ -21,5 +41,5 @@ function AlertWarning() {
     );
 }
 export {
-    AlertSuccess, AlertWarning
+    AlertSuccess, AlertWarning,AlertSuccessRegister,AlertSuccessLogin
 }

@@ -50,7 +50,7 @@ export default function PesticideGuide() {
                 </div>
                 <button onClick={onHandleSubmit} className="btn btn-primary">Submit</button>
             </form>
-            <div>
+            <div className="table-block">
                 {data && status=="ok" && <PesticideTable data={data}/>}
                 
             </div>

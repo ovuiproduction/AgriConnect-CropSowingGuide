@@ -1,12 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import {
-  Link,
   Route,
   BrowserRouter as Router,
-  Navigate,
   Routes,
-} from "react-router-dom"; //this used for routing
+} from "react-router-dom";
 import Cover from "./components/Cover";
 import SubmitCrop from "./components/SubmitCrop";
 import Home from "./components/Home";
@@ -19,6 +16,10 @@ import SowingGuide from "./components/SowingGuide";
 import StateCropStatistics from "./components/StateCropStatistics";
 import CropDistribution from "./components/CropDistribution";
 import RegionCropdistribution from "./components/RegionCropDistribution";
+import ReplyPost from "./components/ReplyPost";
+import Login from "./components/Login";
+import Register from './components/Register';
+import ViewBlog from "./components/ViewBlog";
 
 const mahacrops = {
   Jowar: require("./Assets/images/jowarlogo.webp"),
@@ -105,6 +106,8 @@ export default function App() {
           <Route exact path="/submitcrop" element={<SubmitCrop />} />
           <Route exact path="/pesticideguide" element={<PesticideGuide />} />
           <Route exact path="/expert" element={<Expert />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
           <Route exact path="/farmertofarmer" element={<F2F_Home />} />
           <Route exact path="/sowingguide" element={<SowingGuide />} />
     
@@ -494,6 +497,8 @@ export default function App() {
           {/* Post opration routes */}
           <Route exact path="/newpost" element={<NewPost />} />
           <Route exact path="/editpost" element={<Editpost />} />
+          <Route exact path="/view-blog" element={<ViewBlog />} />
+          <Route exact path="/replypost" element={<ReplyPost />} />
         </Routes>
       </Router>
     </>

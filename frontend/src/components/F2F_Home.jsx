@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Editpost from "./Editpost";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 import "../css/F2F_Home.css";
 
 export default function F2F_Home() {
   const [blogs, setBlogs] = useState([]);
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const username = location.state.username;
 
   const deletepost = async (id) => {
+    alert("Are you Sure to Delete ?")
     try {
       const response = await fetch("http://localhost:5000/deletepost", {
         method: "post",
@@ -17,7 +20,6 @@ export default function F2F_Home() {
           "Content-Type": "application/json",
         },
       });
-      let data = await response.json();
       fetchblogs();
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -25,7 +27,15 @@ export default function F2F_Home() {
   };
 
   const editpost = async (blog) => {
-    navigate("/editpost", { state: blog });
+    navigate("/editpost", { state: {blog:blog,username:username} });
+  };
+
+  const replypost = async (id) => {
+    navigate("/replypost", { state: {id:id,username:username} });
+  };
+
+  const viewBlog = async (blog) => {
+    navigate("/view-blog", { state: {blog:blog,username:username} });
   };
 
   const fetchblogs = async () => {
@@ -44,9 +54,15 @@ export default function F2F_Home() {
       console.error("Error fetching data:", error);
     }
   };
+
   useEffect(() => {
     fetchblogs();
   }, []);
+
+  const handleNewPost = ()=>{
+    navigate("/newpost",{state:{username:username}});
+  }
+  
   return (
     <>
       <link
@@ -57,9 +73,9 @@ export default function F2F_Home() {
       ></link>
       <nav className="navbar navbar-expand-lg bg-body-tertiary f2fnavbootstrap">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            CSG
-          </a>
+          <Link className="navbar-brand" to="/home">
+          CSG
+            </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -74,14 +90,8 @@ export default function F2F_Home() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
               </li>
               <li>
-                <a id="viewBlog" className="nav-link" href="/viewblogs">
-                  View Blogs
-                </a>
               </li>
             </ul>
           </div>
@@ -89,14 +99,12 @@ export default function F2F_Home() {
       </nav>
       <div className="f2fhomeparent">
         <div className="f2fnav">
-          <h1 className="f2fhomeheader">Connect with peers</h1>
+          <h1 className="f2fhomeheader">AgriConnect</h1>
         </div>
-
         <div className="maincontainer">
+          <h2 className="user-header"><i class="fa-solid fa-user"></i>{username}</h2>
           <div className="newpostlinkblock">
-            <Link className="newpostlink" to="/newpost">
-              New post
-            </Link>
+          <button onClick={handleNewPost} type="button" class="btn btn-primary">New Post</button>
           </div>
 
           <div className="card-container">
@@ -110,26 +118,43 @@ export default function F2F_Home() {
                     <h5 className="card-title">{blog.blogtitle}</h5>
                     <p className="card-text">{blog.blogcontent}</p>
                     <div className="controls">
-                      <button
-                        onClick={() => editpost(blog)}
+                      
+                    <button
                         type="button"
-                        className="btn btn-primary controlbtn"
+                        className="read-btn"
+                        onClick={() => viewBlog(blog)}
                       >
-                        Edit
+                      ...Read More
                       </button>
+
+                    {username == blog.username && 
+                     <button
+                     onClick={() => editpost(blog)}
+                     type="button"
+                     className="edit-btn controlbtn"
+                   >
+                     Edit
+                   </button>
+                    }
+                     
                       <button
                         type="button"
-                        className="btn btn-secondary controlbtn"
+                        className="reply-btn controlbtn"
+                        onClick={() => replypost(blog._id)}
                       >
                         Reply
                       </button>
+
+                    {username == blog.username && 
                       <button
                         onClick={() => deletepost(blog._id)}
                         type="button"
-                        className="btn btn-danger controlbtn"
+                        className="delete-btn controlbtn"
                       >
                         Delete
                       </button>
+                    }
+
                     </div>
                   </div>
                 </div>

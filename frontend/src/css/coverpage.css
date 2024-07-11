@@ -85,3 +85,17 @@
   border-color:white;
   border-radius:0px;
 }
+
+.coverHomeLink:hover{
+color: white;
+text-decoration: underline;
+}
+
+.coverServicesLink:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+.coverStartLink:hover{
+  color: white;
+}

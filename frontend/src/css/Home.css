@@ -164,3 +164,9 @@ nav ul li a:hover{
     background-color:rgb(78, 78, 78);
     border-radius:0px;
 }
+.SubmitCropLink:hover{
+   color:white;
+}
+.SowingGuideLink:hover{
+    color: white;
+}

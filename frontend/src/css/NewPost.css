@@ -4,3 +4,7 @@
     height: auto;
     padding: 2rem;
 }
+
+.blogtext{
+    text-align: justify;
+}
