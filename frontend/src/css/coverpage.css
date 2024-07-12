@@ -1,6 +1,6 @@
 .coverBody{
   width:100%;
-  height:100vh;
+  height:90vh;
   background-image:url(../Assets/images/coverimg.jpg);
   background-repeat: no-repeat;
   background-size:100% 100%;
@@ -28,6 +28,7 @@
   height: auto;
   display: flex;
   color: white;
+  margin-top:5vh;
 }
 
 .coverHeaderText{
@@ -62,7 +63,6 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  /* background-color:green; */
   border:4px solid green;
   margin:15% auto auto auto;
   width:max-content;
@@ -70,6 +70,7 @@
   padding:1rem;
   cursor: pointer;
   transform:1s 1s;
+  background-color: rgba(35, 48, 33, 0.5);
 }
 
 .coverStartLink{

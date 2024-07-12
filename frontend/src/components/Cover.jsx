@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/coverpage.css";
+import Footer from '../partials/Footer';
 
 export default function Cover() {
   return (
@@ -27,6 +28,7 @@ export default function Cover() {
           </h2>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

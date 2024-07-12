@@ -1,0 +1,10 @@
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: darkgreen;
+    height:10vh;
+    color: white;
+    font-size:25px;
+}
