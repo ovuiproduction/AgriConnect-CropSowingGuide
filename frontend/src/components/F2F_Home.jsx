@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate,useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../css/F2F_Home.css";
 
 export default function F2F_Home() {
@@ -11,7 +11,7 @@ export default function F2F_Home() {
   const username = location.state.username;
 
   const deletepost = async (id) => {
-    alert("Are you Sure to Delete ?")
+    alert("Are you Sure to Delete ?");
     try {
       const response = await fetch("http://localhost:5000/deletepost", {
         method: "post",
@@ -27,15 +27,15 @@ export default function F2F_Home() {
   };
 
   const editpost = async (blog) => {
-    navigate("/editpost", { state: {blog:blog,username:username} });
+    navigate("/editpost", { state: { blog: blog, username: username } });
   };
 
   const replypost = async (id) => {
-    navigate("/replypost", { state: {id:id,username:username} });
+    navigate("/replypost", { state: { id: id, username: username } });
   };
 
   const viewBlog = async (blog) => {
-    navigate("/view-blog", { state: {blog:blog,username:username} });
+    navigate("/view-blog", { state: { blog: blog, username: username } });
   };
 
   const fetchblogs = async () => {
@@ -59,10 +59,10 @@ export default function F2F_Home() {
     fetchblogs();
   }, []);
 
-  const handleNewPost = ()=>{
-    navigate("/newpost",{state:{username:username}});
-  }
-  
+  const handleNewPost = () => {
+    navigate("/newpost", { state: { username: username } });
+  };
+
   return (
     <>
       <link
@@ -74,8 +74,8 @@ export default function F2F_Home() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary f2fnavbootstrap">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
-          CSG
-            </Link>
+            CSG
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -89,10 +89,8 @@ export default function F2F_Home() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-              </li>
-              <li>
-              </li>
+              <li className="nav-item"></li>
+              <li></li>
             </ul>
           </div>
         </div>
@@ -102,9 +100,18 @@ export default function F2F_Home() {
           <h1 className="f2fhomeheader">AgriConnect</h1>
         </div>
         <div className="maincontainer">
-          <h2 className="user-header"><i class="fa-solid fa-user"></i>{username}</h2>
+          <h2 className="user-header">
+            <i class="fa-solid fa-user"></i>
+            {username}
+          </h2>
           <div className="newpostlinkblock">
-          <button onClick={handleNewPost} type="button" class="btn btn-primary">New Post</button>
+            <button
+              onClick={handleNewPost}
+              type="button"
+              class="btn btn-primary"
+            >
+              New Post
+            </button>
           </div>
 
           <div className="card-container">
@@ -118,25 +125,24 @@ export default function F2F_Home() {
                     <h5 className="card-title">{blog.blogtitle}</h5>
                     <p className="card-text">{blog.blogcontent}</p>
                     <div className="controls">
-                      
-                    <button
+                      <button
                         type="button"
                         className="read-btn"
                         onClick={() => viewBlog(blog)}
                       >
-                      ...Read More
+                        ...Read More
                       </button>
 
-                    {username == blog.username && 
-                     <button
-                     onClick={() => editpost(blog)}
-                     type="button"
-                     className="edit-btn controlbtn"
-                   >
-                     Edit
-                   </button>
-                    }
-                     
+                      {username == blog.username && (
+                        <button
+                          onClick={() => editpost(blog)}
+                          type="button"
+                          className="edit-btn controlbtn"
+                        >
+                          Edit
+                        </button>
+                      )}
+
                       <button
                         type="button"
                         className="reply-btn controlbtn"
@@ -145,16 +151,15 @@ export default function F2F_Home() {
                         Reply
                       </button>
 
-                    {username == blog.username && 
-                      <button
-                        onClick={() => deletepost(blog._id)}
-                        type="button"
-                        className="delete-btn controlbtn"
-                      >
-                        Delete
-                      </button>
-                    }
-
+                      {username == blog.username && (
+                        <button
+                          onClick={() => deletepost(blog._id)}
+                          type="button"
+                          className="delete-btn controlbtn"
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

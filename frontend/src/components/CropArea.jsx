@@ -3,19 +3,22 @@ import "../css/CropDistribution.css";
 import Chart from "chart.js/auto";
 
 export default function CropArea(props) {
-  const {crop,state} = props;
+  const { crop, state } = props;
   let [cropdata, setCropdata] = useState([]);
   var chart;
   var piechart;
   const fetchCropData = async () => {
     try {
-      const response = await fetch("http://localhost:5000/getAreaCropNameWise", {
-        method: "post",
-        body: JSON.stringify({crop:crop,state:state}),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://localhost:5000/getAreaCropNameWise",
+        {
+          method: "post",
+          body: JSON.stringify({ crop: crop, state: state }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
       setCropdata(data.data);
     } catch (error) {
@@ -24,16 +27,16 @@ export default function CropArea(props) {
   };
 
   const createChart = () => {
-    if(chart) chart.destroy();
+    if (chart) chart.destroy();
     const ctx = document.getElementById("myChartArea");
     chart = new Chart(ctx, {
       type: "bar",
       data: {
-        labels: cropdata.map(item=>item._id),
+        labels: cropdata.map((item) => item._id),
         datasets: [
           {
             label: "Crop Area in hecter",
-            data: cropdata.map(item=>item.totalArea),
+            data: cropdata.map((item) => item.totalArea),
             borderWidth: 1,
           },
         ],
@@ -49,16 +52,16 @@ export default function CropArea(props) {
   };
 
   const createPieChart = () => {
-    if(piechart) piechart.destroy();
+    if (piechart) piechart.destroy();
     const piectx = document.getElementById("myPieChart");
     piechart = new Chart(piectx, {
       type: "pie",
       data: {
-        labels: cropdata.map(item=>item._id),
+        labels: cropdata.map((item) => item._id),
         datasets: [
           {
             label: "Crop Area in hecter",
-            data: cropdata.map(item=>item.totalArea),
+            data: cropdata.map((item) => item.totalArea),
             borderWidth: 1,
           },
         ],
@@ -73,20 +76,16 @@ export default function CropArea(props) {
     });
   };
 
-
-
-
   useEffect(() => {
     fetchCropData();
   }, []);
 
-
   useEffect(() => {
     if (cropdata.length > 0) {
-          cropdata.sort((a,b)=>b.totalArea-a.totalArea);
-          createChart();
-          createPieChart();
-        }
+      cropdata.sort((a, b) => b.totalArea - a.totalArea);
+      createChart();
+      createPieChart();
+    }
   }, [cropdata]);
 
   return (
@@ -100,17 +99,17 @@ export default function CropArea(props) {
               color: "blueviolet",
             }}
           >
-          {crop} Area Sowing Distribution in {state} state
+            {crop} Area Sowing Distribution in {state} state
           </h2>
           <br />
           <br />
           <div className="graphs">
-          <div className="graph">
-            <canvas id="myChartArea"></canvas>
-          </div>
-          <div  className="graph">
-            <canvas id="myPieChart"></canvas>
-          </div>
+            <div className="graph">
+              <canvas id="myChartArea"></canvas>
+            </div>
+            <div className="graph">
+              <canvas id="myPieChart"></canvas>
+            </div>
           </div>
         </div>
       </div>

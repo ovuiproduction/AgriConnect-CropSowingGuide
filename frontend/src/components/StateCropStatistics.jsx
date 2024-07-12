@@ -6,7 +6,7 @@ import "../css/SowingGuide.css";
 import StateArea from "./StateArea";
 
 export default function StateCropStatistics(props) {
-  const { state, crops ,divisions} = props;
+  const { state, crops, divisions } = props;
   let currstate = state;
   var piechart;
   if (currstate === "Madhyapradesh") {
@@ -32,7 +32,7 @@ export default function StateCropStatistics(props) {
     }
   };
   const createChart = () => {
-    if(piechart) piechart.destroy();
+    if (piechart) piechart.destroy();
     const piectx = document.getElementById("myPieChart");
     piechart = new Chart(piectx, {
       type: "pie",
@@ -62,7 +62,7 @@ export default function StateCropStatistics(props) {
 
   useEffect(() => {
     if (cropdata.length > 0) {
-      if(piechart) piechart.destroy();
+      if (piechart) piechart.destroy();
       createChart();
     }
   }, [cropdata]);
@@ -151,8 +151,8 @@ export default function StateCropStatistics(props) {
       </div>
 
       <div className="overviewofstate">
-      <div className="statemap">
-      <h3
+        <div className="statemap">
+          <h3
             style={{
               fontFamily: "sans-serif",
               fontWeight: 600,
@@ -160,10 +160,9 @@ export default function StateCropStatistics(props) {
               marginBottom: "50px",
             }}
           >
-          Crop sowing Area of {currstate}
-          <StateArea  state={currstate}/>
+            Crop sowing Area of {currstate}
+            <StateArea state={currstate} />
           </h3>
-
         </div>
         <div className="prevyeargraph">
           <h3

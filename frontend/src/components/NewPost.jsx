@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import {useNavigate,useLocation } from "react-router-dom";
-import Alert, { AlertSuccess, AlertWarning } from "./Alert"; 
+import { useNavigate, useLocation } from "react-router-dom";
+import Alert, { AlertSuccess, AlertWarning } from "./Alert";
 import "../css/NewPost.css";
 
 export default function NewPost() {
   const [blogtitle, setBlogtitle] = useState("");
   const [blogcontent, setBlogcontent] = useState("");
-  const [postSaveStatus,setPostSaveStatus] = useState(false);
+  const [postSaveStatus, setPostSaveStatus] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const username = location.state.username;
 
   const savePost = async (e) => {
@@ -24,20 +24,20 @@ export default function NewPost() {
       });
       const data = await response.json();
       console.log(data);
-      if(data.status == "ok"){
+      if (data.status == "ok") {
         setPostSaveStatus(true);
-        setTimeout(()=>{
-          navigate("/farmertofarmer",{state:{username:username}});
-        },[2000]);
+        setTimeout(() => {
+          navigate("/farmertofarmer", { state: { username: username } });
+        }, [2000]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  
+
   let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer",{state:{username:username}});
+    navigate("/farmertofarmer", { state: { username: username } });
   };
 
   return (
@@ -60,7 +60,7 @@ export default function NewPost() {
           </div>
         </div>
       </nav>
-      {postSaveStatus && <AlertSuccess/>}
+      {postSaveStatus && <AlertSuccess />}
       <div className="postBlock">
         <form>
           <div className="mb-3">

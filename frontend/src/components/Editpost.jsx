@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate, useLocation } from "react-router-dom";
-import Alert, { AlertSuccess, AlertWarning } from "./Alert"; 
+import { useNavigate, useLocation } from "react-router-dom";
+import Alert, { AlertSuccess, AlertWarning } from "./Alert";
 import "../css/NewPost.css";
 
 export default function Editpost() {
   let [blogtitle, setBlogtitle] = useState("");
   let [blogcontent, setBlogcontent] = useState("");
-  const [updatePostStatus,setUpdatePostStatus] = useState(false);
-  const [id ,setBlogId] = useState("");
+  const [updatePostStatus, setUpdatePostStatus] = useState(false);
+  const [id, setBlogId] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,12 +17,11 @@ export default function Editpost() {
     setBlogId(location.state.blog._id);
     setBlogtitle(location.state.blog.blogtitle);
     setBlogcontent(location.state.blog.blogcontent);
-  },[]);
-
+  }, []);
 
   let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer",{state:{username:username}});
+    navigate("/farmertofarmer", { state: { username: username } });
   };
 
   const updatePost = async (e) => {
@@ -30,17 +29,17 @@ export default function Editpost() {
     try {
       const response = await fetch("http://localhost:5000/updatepost", {
         method: "post",
-        body: JSON.stringify({id,username, blogtitle, blogcontent }), //providing to server
+        body: JSON.stringify({ id, username, blogtitle, blogcontent }), //providing to server
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-      if(data.status == "ok"){
+      if (data.status == "ok") {
         setUpdatePostStatus(true);
-        setTimeout(()=>{
-          navigate("/farmertofarmer",{state:{username:username}});
-        },[2000]);
+        setTimeout(() => {
+          navigate("/farmertofarmer", { state: { username: username } });
+        }, [2000]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -67,7 +66,7 @@ export default function Editpost() {
           </div>
         </div>
       </nav>
-      {updatePostStatus && <AlertSuccess/>}
+      {updatePostStatus && <AlertSuccess />}
       <div className="postBlock">
         <form>
           <div className="mb-3">
@@ -95,7 +94,11 @@ export default function Editpost() {
               rows="3"
             ></textarea>
           </div>
-          <button onClick={updatePost} type="button" className="btn btn-primary">
+          <button
+            onClick={updatePost}
+            type="button"
+            className="btn btn-primary"
+          >
             Update Post
           </button>
         </form>

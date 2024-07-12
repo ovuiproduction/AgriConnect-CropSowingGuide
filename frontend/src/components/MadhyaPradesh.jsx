@@ -11,8 +11,15 @@ export default function MadhyaPradeshDivision({ onDivisionChange }) {
   return (
     <>
       <div className="mb-3">
-        <label htmlFor="division" className="form-label">Division</label>
-        <select className="form-control" onChange={handleDivisionChange} name="division" id="divisionname">
+        <label htmlFor="division" className="form-label">
+          Division
+        </label>
+        <select
+          className="form-control"
+          onChange={handleDivisionChange}
+          name="division"
+          id="divisionname"
+        >
           <option value="">Choose Region</option>
           <option value="Malwa">Malwa</option>
           <option value="Bundelkhand">Bundelkhand</option>
@@ -36,8 +43,15 @@ export function MadhyaPradeshCrop({ onCropChange }) {
   return (
     <>
       <div className="mb-3">
-        <label htmlFor="cropname" className="form-label">Crop Name</label>
-        <select className="form-control" onChange={handleCropChange} name="cropname" id="crop">
+        <label htmlFor="cropname" className="form-label">
+          Crop Name
+        </label>
+        <select
+          className="form-control"
+          onChange={handleCropChange}
+          name="cropname"
+          id="crop"
+        >
           <option value="">Choose Crop</option>
           <option value="Soyabean">Soyabean</option>
           <option value="Wheat">Wheat</option>

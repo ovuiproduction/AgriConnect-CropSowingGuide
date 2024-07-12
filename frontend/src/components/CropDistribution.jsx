@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/CropDistribution.css";
 import Chart from "chart.js/auto";
 import CropArea from "./CropArea";
@@ -8,22 +8,24 @@ export default function CropDistribution(props) {
   let [cropdata, setCropdata] = useState([]);
   const { state, crop, division } = props;
   let chart;
-  const states = ["maharashtra","uttarpradesh","madhyapradesh","westbengal","punjab"];
+  const states = [
+    "maharashtra",
+    "uttarpradesh",
+    "madhyapradesh",
+    "westbengal",
+    "punjab",
+  ];
   let backurl = "";
-  if(state === "Maharashtra"){
-    backurl=states[0];
-  }
-  else if(state == "Uttar Pradesh"){
-    backurl=states[1];
-  }
-  else if(state == "Madhya Pradesh"){
-    backurl=states[2];
-  }
-  else if(state == "West Bengal"){
-    backurl=states[3];
-  }
-  else if(state == "Punjab"){
-    backurl=states[4];
+  if (state === "Maharashtra") {
+    backurl = states[0];
+  } else if (state == "Uttar Pradesh") {
+    backurl = states[1];
+  } else if (state == "Madhya Pradesh") {
+    backurl = states[2];
+  } else if (state == "West Bengal") {
+    backurl = states[3];
+  } else if (state == "Punjab") {
+    backurl = states[4];
   }
   const fetchCropData = async () => {
     try {
@@ -42,7 +44,7 @@ export default function CropDistribution(props) {
   };
 
   const createChart = () => {
-    if(chart) chart.destroy();
+    if (chart) chart.destroy();
     const ctx = document.getElementById("myChart");
     chart = new Chart(ctx, {
       type: "bar",
@@ -66,8 +68,6 @@ export default function CropDistribution(props) {
     });
   };
 
-
-
   useEffect(() => {
     fetchCropData();
   }, []);
@@ -80,12 +80,12 @@ export default function CropDistribution(props) {
 
   return (
     <>
-    <nav className="navCropDistribution">
+      <nav className="navCropDistribution">
         <div className="containerCropDistribution">
-         <h1>{crop}</h1>
+          <h1>{crop}</h1>
         </div>
         <Link to={`/${backurl}`}>Back</Link>
-    </nav>
+      </nav>
       <div className="crop_sowingdata_bar">
         <div className="graphBlock">
           <h2
@@ -102,7 +102,7 @@ export default function CropDistribution(props) {
           </div>
         </div>
       </div>
-      <CropArea state={state} crop={crop}/>
+      <CropArea state={state} crop={crop} />
     </>
   );
 }

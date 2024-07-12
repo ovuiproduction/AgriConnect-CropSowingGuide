@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../css/NewPost.css";
 
 export default function ViewBlog() {
@@ -13,12 +13,11 @@ export default function ViewBlog() {
   useEffect(() => {
     setBlogtitle(location.state.blog.blogtitle);
     setBlogcontent(location.state.blog.blogcontent);
-  },[]);
-
+  }, []);
 
   let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer",{state:{username:username}});
+    navigate("/farmertofarmer", { state: { username: username } });
   };
 
   return (
@@ -42,14 +41,14 @@ export default function ViewBlog() {
         </div>
       </nav>
       <div className="postBlock">
-          <div className="mb-3">
-            <label htmlFor="title" className="form-label">
-              Title : <span>{blogtitle}</span>
-            </label>
-          </div>
-          <div className="mb-3">
-           <p className="blogtext">{blogcontent}</p>
-          </div>
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Title : <span>{blogtitle}</span>
+          </label>
+        </div>
+        <div className="mb-3">
+          <p className="blogtext">{blogcontent}</p>
+        </div>
       </div>
     </>
   );

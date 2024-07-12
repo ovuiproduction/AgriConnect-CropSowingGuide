@@ -13,15 +13,14 @@ export default function NewPost() {
 
   let returnHome = async (e) => {
     e.preventDefault();
-    navigate("/farmertofarmer",{state:{username:username}});
+    navigate("/farmertofarmer", { state: { username: username } });
   };
-
 
   const fetchReplyData = async () => {
     try {
       const response = await fetch("http://localhost:5000/fetch-reply", {
         method: "post",
-        body: JSON.stringify({ id: blogId}), //providing to server
+        body: JSON.stringify({ id: blogId }), //providing to server
         headers: {
           "Content-Type": "application/json",
         },
@@ -40,9 +39,13 @@ export default function NewPost() {
   const replyPost = async (e) => {
     e.preventDefault();
     try {
-        const response = await fetch("http://localhost:5000/replypost", {
+      const response = await fetch("http://localhost:5000/replypost", {
         method: "post",
-        body: JSON.stringify({ blogId: blogId, text: replyText ,commentOwner:username}), //providing to server
+        body: JSON.stringify({
+          blogId: blogId,
+          text: replyText,
+          commentOwner: username,
+        }), //providing to server
         headers: {
           "Content-Type": "application/json",
         },
@@ -66,8 +69,11 @@ export default function NewPost() {
         src="https://kit.fontawesome.com/dd438282bc.js"
         crossOrigin="anonymous"
       ></script>
-     
-      <div class="header-reply"><i onClick={returnHome} className="fa-solid fa-circle-left"></i>Comment Box</div>
+
+      <div class="header-reply">
+        <i onClick={returnHome} className="fa-solid fa-circle-left"></i>Comment
+        Box
+      </div>
       <div class="reply-maincontainer">
         <div class="reply-commentsBlock">
           <div class="mainCommentsBlock">

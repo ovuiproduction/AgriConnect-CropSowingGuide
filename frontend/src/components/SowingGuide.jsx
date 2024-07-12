@@ -1,11 +1,11 @@
 import react from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import img2 from "../Assets/images/HomeLogo.png";
-import mahaMap from "../Assets/images/maharashtraMap.png"
-import mpMap from "../Assets/images/madhypradeshMap.png"
-import upMap from "../Assets/images/UPMap.jpeg"
-import punjabMap from "../Assets/images/punjabMap.png"
-import westBengalMap from "../Assets/images/westBengalMap.png"
+import mahaMap from "../Assets/images/maharashtraMap.png";
+import mpMap from "../Assets/images/madhypradeshMap.png";
+import upMap from "../Assets/images/UPMap.jpeg";
+import punjabMap from "../Assets/images/punjabMap.png";
+import westBengalMap from "../Assets/images/westBengalMap.png";
 import "../css/SowingGuide.css";
 
 export default function SowingGuide() {
@@ -32,7 +32,11 @@ export default function SowingGuide() {
         </Link>
       </nav>
       <label
-        style={{margin:"30px auto auto 50px" ,fontSize:"20px" ,color:"gray"}}
+        style={{
+          margin: "30px auto auto 50px",
+          fontSize: "20px",
+          color: "gray",
+        }}
         htmlFor=".commodity"
       >
         State Wise
