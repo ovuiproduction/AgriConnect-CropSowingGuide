@@ -65,7 +65,7 @@ npm install express, mongoose, cors, body-parser
 npm install react,react-scripts --save
 ```
 ```bash
-npm install react-router-dom
+npm install react-dom,react-router-dom
 ```
 ```bash
 npm install chart.js
