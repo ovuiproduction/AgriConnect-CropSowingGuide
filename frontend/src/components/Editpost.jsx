@@ -91,7 +91,7 @@ export default function Editpost() {
               onChange={(e) => setBlogcontent(e.target.value)}
               className="form-control"
               id="exampleFormControlTextarea1"
-              rows="3"
+              rows="8"
             ></textarea>
           </div>
           <button

@@ -106,43 +106,39 @@ export default function SubmitCrop() {
               <option value="West Bengal">West Bengal</option>
             </select>
           </div>
+
           {state === "Maharashtra" && (
             <MaharashtraDivision onDivisionChange={handleDivisionChange} />
           )}
           {state === "Maharashtra" && (
             <CropSelection onCropChange={handleCropChange} />
           )}
+
           {state === "Madhya Pradesh" && (
             <MadhyaPradeshDivision onDivisionChange={handleDivisionChange} />
           )}
           {state === "Madhya Pradesh" && (
             <MadhyaPradeshCrop onCropChange={handleCropChange} />
           )}
+
           {state === "Punjab" && (
             <PunjabDivision onDivisionChange={handleDivisionChange} />
           )}
           {state === "Punjab" && <PunjabCrop onCropChange={handleCropChange} />}
+
           {state === "Uttar Pradesh" && (
             <UttarPradeshDivision onDivisionChange={handleDivisionChange} />
           )}
           {state === "Uttar Pradesh" && (
             <UttarPradeshCrop onCropChange={handleCropChange} />
           )}
+          
           {state === "West Bengal" && (
             <WestBengalDivision onDivisionChange={handleDivisionChange} />
           )}
           {state === "West Bengal" && (
             <WestBengalCrop onCropChange={handleCropChange} />
           )}
-          {/* <div className="mb-3">
-          <label htmlFor="division" className="form-label">Division</label>
-          <input value={division} onChange={(e) => Setdivision(e.target.value)} type="text" className="form-control" id="division" />
-        </div> */}
-
-          {/* <div className="mb-3">
-          <label htmlFor="cropname" className="form-label">Crop Name</label>
-          <input value={cropname} onChange={(e) => Setcropname(e.target.value)} type="text" className="form-control" id="cropname" />
-        </div> */}
 
           <div className="mb-3">
             <label htmlFor="croparea" className="form-label">
